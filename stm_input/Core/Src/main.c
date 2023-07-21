@@ -18,7 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdio.h>
+#include "stm32f4xx.h"
+#include <string.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -66,6 +68,7 @@ static void MX_CAN1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+char gearCombination[10];
 
   /* USER CODE END 1 */
 
@@ -97,7 +100,47 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  GPIO_PinState rotarySwitchState0 = HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0);
+	  GPIO_PinState rotarySwitchState1 = HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_1);
+	  GPIO_PinState rotarySwitchState2 = HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2);
+	  GPIO_PinState rotarySwitchState3 = HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_3);
 
+	  GPIO_PinState limitSwitchState1 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+	  GPIO_PinState limitSwitchState2 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
+	  GPIO_PinState limitSwitchState3 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
+	  
+	  if (rotarySwitchState0 == GPIO_PIN_SET){
+		  strcpy(gearCombination, "LR");
+	  }
+	  else if (rotarySwitchState1 == GPIO_PIN_SET){
+		  strcpy(gearCombination, "N");
+	  }
+	  else if (rotarySwitchState2 == GPIO_PIN_SET){
+	      gearCombination[0] = "L";
+	  }
+	  else if (rotarySwitchState3 == GPIO_PIN_SET){
+	      gearCombination[0] = "H";
+	  }
+	  else {
+	      printf("Error in Rotary switch");
+	  }
+
+	  if (gearCombination[0]=="L"|| gearCombination[0]=="H")
+	  {
+	      if (limitSwitchState1 == GPIO_PIN_SET){
+	      gearCombination[1] = "1";
+	      }
+	  else if (limitSwitchState2 == GPIO_PIN_SET){
+	      gearCombination[1] = "2";
+	  	  }
+	  else if (rotarySwitchState3 == GPIO_PIN_SET){
+	      gearCombination[1] = "3";
+	  	  }
+	  }
+
+	      
+	 
+	  
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
