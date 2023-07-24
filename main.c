@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Headercan */
+/* USER CODE BEGIN Header*/
 	/**
 	  ******************************************************************************
 	  * @file           : main.c
@@ -33,7 +33,29 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+typedef struct {
+    char gearCombination[3]; // Store gear combination (e.g., "LR", "N", "L1", etc.)
+    char stringValue[4];     // Store the corresponding string value (3 characters + '\0' null-terminator)
+} GearInfo;
 
+GearInfo gearInfoList[] = {
+    { "R", "001" }, 
+    { "L1", "101" }, 
+    { "L2", "102" }, 
+    { "L3", "103" }, 
+    { "H1", "111" }, 
+    { "H2", "112" }, 
+    { "H3", "113" },
+};
+#define GEAR_INFO_LIST_SIZE (sizeof(gearInfoList) / sizeof(gearInfoList[0]))
+const char* getGearStringValue(const char* gearCombination) {
+    for (size_t i = 0; i < GEAR_INFO_LIST_SIZE; i++) {
+        if (strcmp(gearCombination, gearInfoList[i].gearCombination) == 0) {
+            return gearInfoList[i].stringValue;
+        }
+    }
+    return NULL; // Return NULL if gear combination is not found in the lookup table
+}
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
