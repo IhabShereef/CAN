@@ -35,7 +35,7 @@
 /* USER CODE BEGIN PD */
 typedef struct {
     char gearCombination[3]; // Store gear combination (e.g., "LR", "N", "L1", etc.)
-    char stringValue[4];     // Store the corresponding string value (3 characters + '\0' null-terminator)
+    unit_8 stringValue[4];     // Store the corresponding string value (3 characters + '\0' null-terminator)
 } GearInfo;
 
 GearInfo gearInfoList[] = {
