@@ -213,7 +213,7 @@ int main(void)
 		 const char* stringValue = getGearStringValue(gearCombination);
 		 if(!strcmp(gearMode,gearCombination))
 		 {
-			 
+			HAL_CAN_AddTxMessage(&hcan1, &TxHeader, gearIP, &TxMailbox);	 
 		 }
 		 else 
 		 {
@@ -296,7 +296,23 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+CAN_FilterTypeDef canfilterconfig;
 
+    canfilterconfig.FilterActivation = CAN_FILTER_ENABLE;
+    canfilterconfig.FilterBank = 0;
+    canfilterconfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+    //canfilterconfig.FilterIdHigh =0x103<<5;
+    canfilterconfig.FilterIdHigh =0x0000;
+    //canfilterconfig.FilterIdLow = 0;
+    canfilterconfig.FilterIdLow = 0x0000;
+    //canfilterconfig.FilterMaskIdHigh = 0x103<<5;
+    canfilterconfig.FilterMaskIdHigh = 0x0000;
+    canfilterconfig.FilterMaskIdLow = 0x0000;
+    canfilterconfig.FilterMode = CAN_FILTERMODE_IDMASK;
+    canfilterconfig.FilterScale = CAN_FILTERSCALE_32BIT;
+    canfilterconfig.SlaveStartFilterBank =20;
+
+    HAL_CAN_ConfigFilter(&hcan1, &canfilterconfig);
   /* USER CODE END CAN1_Init 2 */
 
 }
