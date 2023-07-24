@@ -35,11 +35,12 @@
 /* USER CODE BEGIN PD */
 typedef struct {
     char gearCombination[3]; // Store gear combination (e.g., "LR", "N", "L1", etc.)
-    uint8_t stringValue[4];     // Store the corresponding string value (3 characters + '\0' null-terminator)
+    uint8_t stringValue;     // Store the corresponding string value (3 characters + '\0' null-terminator)
 } GearInfo;
 
 GearInfo gearInfoList[] = {
-    { "R", 001 }, 
+    { "R", 001 },
+    {  "N", 100 },
     { "L1", 101 }, 
     { "L2", 102 }, 
     { "L3", 103 }, 
@@ -48,7 +49,7 @@ GearInfo gearInfoList[] = {
     { "H3", 113},
 };
 #define GEAR_INFO_LIST_SIZE (sizeof(gearInfoList) / sizeof(gearInfoList[0]))
-const char* getGearStringValue(const char* gearCombination) {
+const uint8_t getGearStringValue(const char* gearCombination) {
     for (size_t i = 0; i < GEAR_INFO_LIST_SIZE; i++) {
         if (strcmp(gearCombination, gearInfoList[i].gearCombination) == 0) {
             return gearInfoList[i].stringValue;
@@ -210,7 +211,7 @@ int main(void)
 		 	{
 		 		  strcpy(gearMode, "H3");
 		 	}  
-		 const char* stringValue = getGearStringValue(gearCombination);
+		 const uint8_t stringValue = getGearStringValue(gearCombination);
 		 if(!strcmp(gearMode,gearCombination))
 		 {
 			HAL_CAN_AddTxMessage(&hcan1, &TxHeader, gearIP, &TxMailbox);	 
