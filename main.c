@@ -159,7 +159,7 @@ int main(void)
 		  GPIO_PinState limitSwitchStatef = HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15); //Limit switch corresponding to R
 		 	  
 		 	  if (rotarySwitchState0 == GPIO_PIN_SET){
-		 		  strcpy(gearCombination, "LR");
+		 		  strcpy(gearCombination, "R");
 		 	  }
 		 	  else if (rotarySwitchState1 == GPIO_PIN_SET){
 		 		  strcpy(gearCombination, "N");
@@ -210,7 +210,7 @@ int main(void)
 		 	{
 		 		  strcpy(gearMode, "H3");
 		 	}  
-		 	
+		 const char* stringValue = getGearStringValue(gearCombination);
 		 if(!strcmp(gearMode,gearCombination))
 		 {
 			 
