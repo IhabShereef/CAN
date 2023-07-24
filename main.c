@@ -39,13 +39,13 @@ typedef struct {
 } GearInfo;
 
 GearInfo gearInfoList[] = {
-    { "R", "001" }, 
-    { "L1", "101" }, 
-    { "L2", "102" }, 
-    { "L3", "103" }, 
-    { "H1", "111" }, 
-    { "H2", "112" }, 
-    { "H3", "113" },
+    { "R", 001 }, 
+    { "L1", 101 }, 
+    { "L2", 102 }, 
+    { "L3", 103 }, 
+    { "H1", 111}, 
+    { "H2", 112 }, 
+    { "H3", 113},
 };
 #define GEAR_INFO_LIST_SIZE (sizeof(gearInfoList) / sizeof(gearInfoList[0]))
 const char* getGearStringValue(const char* gearCombination) {
