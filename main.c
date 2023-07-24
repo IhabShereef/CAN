@@ -211,7 +211,7 @@ int main(void)
 		 	{
 		 		  strcpy(gearMode, "H3");
 		 	}  
-		 const uint8_t stringValue = getGearStringValue(gearCombination);
+		 gearIP = getGearStringValue(gearCombination);
 		 if(!strcmp(gearMode,gearCombination))
 		 {
 			HAL_CAN_AddTxMessage(&hcan1, &TxHeader, gearIP, &TxMailbox);	 
